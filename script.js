@@ -77,6 +77,31 @@ const displayMovments = (movements) => {
 
 displayMovments(account1.movements);
 
+/* get the frist letter */
+const createUsersName = (accs) => {
+  accs.forEach((acc) => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join("");
+
+    /*  acc.deposit = acc.movements.filter((payment) => payment > 0); */
+
+    /*  acc.amount = acc.movements.reduce((acc, curr) => acc + curr); */
+  });
+};
+createUsersName(accounts);
+console.log(accounts);
+
+const clacDisplayBalace = (movements) => {
+  const balance = movements.reduce((acc, curr) => acc + curr, 0);
+
+  labelBalance.textContent = `${balance} ERU`;
+};
+
+clacDisplayBalace(account3.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
