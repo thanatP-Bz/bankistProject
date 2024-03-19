@@ -61,9 +61,16 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-const displayMovments = (movements) => {
+const displayMovments = (movements, sort = false) => {
   containerMovements.innerHTML = "";
-  movements.forEach((mov, i) => {
+  let sortArray = movements
+    .map((num) => {
+      return num;
+    })
+    .sort((a, b) => a - b);
+
+  const movs = sort ? sortArray : movements;
+  movs.forEach((mov, i) => {
     const type = mov > 0 ? "deposit" : "withdrawal";
 
     const html = `<div class="movements__row">
@@ -190,6 +197,16 @@ btnClose.addEventListener("click", (e) => {
     inputCloseUsername.value = "";
   }
 });
+
+let sorted = false;
+btnSort.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  displayMovments(currentAccount.movements, !sorted);
+
+  sorted = !sorted;
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -199,5 +216,3 @@ const currencies = new Map([
   ["EUR", "Euro"],
   ["GBP", "Pound sterling"],
 ]);
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
