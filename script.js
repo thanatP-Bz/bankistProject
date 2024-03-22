@@ -63,13 +63,10 @@ const inputClosePin = document.querySelector(".form__input--pin");
 
 const displayMovments = (movements, sort = false) => {
   containerMovements.innerHTML = "";
-  let sortArray = movements
-    .map((num) => {
-      return num;
-    })
-    .sort((a, b) => a - b);
 
-  const movs = sort ? sortArray : movements;
+  const movs = sort
+    ? Array.from(movements.map((num) => num).sort((a, b) => a - b))
+    : movements;
   movs.forEach((mov, i) => {
     const type = mov > 0 ? "deposit" : "withdrawal";
 
